@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday 🎂</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffd3a5);
+      padding:20px;
+      position:relative;
+    }
+
+    .card{
+      width:100%;
+      max-width:420px;
+      background:rgba(255,255,255,0.18);
+      backdrop-filter:blur(10px);
+      border-radius:25px;
+      padding:35px 25px;
+      text-align:center;
+      color:white;
+      box-shadow:0 10px 35px rgba(0,0,0,0.2);
+      animation:float 3s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0);
+      }
+      50%{
+        transform:translateY(-10px);
+      }
+    }
+
+    h1{
+      font-size:3rem;
+      margin-bottom:10px;
+    }
+
+    .emoji{
+      font-size:5rem;
+      animation:bounce 1.5s infinite;
+    }
+
+    @keyframes bounce{
+      0%,100%{
+        transform:translateY(0);
+      }
+      50%{
+        transform:translateY(-12px);
+      }
+    }
+
+    p{
+      margin-top:20px;
+      font-size:1.05rem;
+      line-height:1.7;
+    }
+
+    .btn{
+      margin-top:30px;
+      border:none;
+      outline:none;
+      background:white;
+      color:#ff4d8d;
+      padding:14px 28px;
+      border-radius:50px;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+      background:#fff0f5;
+    }
+
+    .footer{
+      margin-top:20px;
+      font-size:0.9rem;
+      opacity:0.9;
+    }
+
+    /* Floating Balloons */
+    .balloon{
+      position:absolute;
+      font-size:3rem;
+      animation:floatBalloon linear infinite;
+      opacity:0.8;
+    }
+
+    .balloon:nth-child(1){
+      left:10%;
+      animation-duration:12s;
+    }
+
+    .balloon:nth-child(2){
+      left:50%;
+      animation-duration:15s;
+    }
+
+    .balloon:nth-child(3){
+      left:80%;
+      animation-duration:10s;
+    }
+
+    @keyframes floatBalloon{
+      0%{
+        bottom:-100px;
+        transform:translateX(0) rotate(0deg);
+      }
+      100%{
+        bottom:110%;
+        transform:translateX(30px) rotate(360deg);
+      }
+    }
+
+    /* Mobile Responsive */
+    @media(max-width:600px){
+      h1{
+        font-size:2.2rem;
+      }
+
+      .emoji{
+        font-size:4rem;
+      }
+
+      p{
+        font-size:0.95rem;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .card{
+        padding:30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Balloons -->
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+  <div class="balloon">🎈</div>
+
+  <div class="card">
+    <h1>Happy Birthday 🎉</h1>
+
+    <div class="emoji">🎂</div>
+
+    <p>
+      Wishing you a day filled with love, joy, laughter,
+      and endless happiness.  
+      May all your dreams come true and your smile
+      shine brighter every day! 💖
+    </p>
+
+    <button class="btn" onclick="celebrate()">
+      Celebrate 🎊
+    </button>
+
+    <div class="footer">
+      Made with ❤️ for your special day
+    </div>
+  </div>
+
+  <script>
+    // Launch confetti on page load
+    window.onload = () => {
+      fireConfetti();
+    };
+
+    // Button click confetti
+    function celebrate() {
+      fireConfetti();
+
+      setTimeout(() => {
+        fireConfetti();
+      }, 500);
+    }
+
+    function fireConfetti() {
+      const duration = 3 * 1000;
+      const animationEnd = Date.now() + duration;
+
+      const interval = setInterval(() => {
+        if (Date.now() > animationEnd) {
+          return clearInterval(interval);
+        }
+
+        confetti({
+          particleCount: 80,
+          spread: 120,
+          startVelocity: 40,
+          ticks: 200,
+          origin: {
+            x: Math.random(),
+            y: Math.random() - 0.2
+          }
+        });
+
+      }, 250);
+    }
+  </script>
+
+</body>
+</html>
